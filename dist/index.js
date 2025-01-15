@@ -1,4 +1,29 @@
 "use strict";
-const sem = "welcome, " + "world";
-console.log(sem);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const Database_1 = require("./utils/Database"); // Dit is de import voor je databaseverbinding
+const app = (0, express_1.default)();
+app.use(express_1.default.json()); // Voor het verwerken van JSON-body's
+// Test API-endpoint
+app.get('/', (req, res) => {
+    res.send('Budget App API draait!');
+});
+// Endpoint om gebruikers op te halen
+app.get('/users', async (req, res) => {
+    try {
+        const [rows] = await Database_1.pool.query('SELECT * FROM users');
+        res.json(rows); // Stuur de gebruikers als JSON terug
+    }
+    catch (err) {
+        res.status(500).json({ error: 'Fout bij ophalen van gebruikers', details: err });
+    }
+});
+// Start de server
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log(`Server draait op http://localhost:${PORT}`);
+});
 //# sourceMappingURL=index.js.map

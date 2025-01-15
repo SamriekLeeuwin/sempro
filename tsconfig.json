@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",          // Gebruik CommonJS-modules (standaard voor Node.js)
+    "moduleResolution": "node",    // Resolutie van modules zoals in Node.js
+    "target": "ES2020",            // Doelversie van JavaScript (ES2020)
+    "sourceMap": true,             // Maak source maps voor debugging
+    "outDir": "./dist",            // De directory waar de JavaScript-bestanden naartoe worden gecompileerd
+    "rootDir": "./src",            // De root directory van je TypeScript-bestanden (src)
+    "esModuleInterop": true,       // Zorg voor compatibiliteit met ES Modules
+    "strict": true                 // Zet strikte type checks aan
+  },
+  "include": [
+    "src/**/*"                     // Neem alle bestanden in de src map mee
+  ]
+}

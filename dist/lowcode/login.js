@@ -24,7 +24,7 @@ if (loginForm) {
                 if (contentType && contentType.includes('application/json')) {
                     const result = await response.json();
                     alert('Login succesvol!');
-                    window.location.href = '/dashboard'; // Redirect naar de dashboardpagina bij succes
+                    window.location.href = 'dashboard.html';
                 }
                 else {
                     // Als de server geen JSON terugstuurt, toon dan de foutmelding

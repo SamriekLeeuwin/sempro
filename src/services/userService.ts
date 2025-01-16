@@ -41,7 +41,8 @@ export const UserService = {
     // Create a new user
     async createUser(username: string, email: string, password: string): Promise<User> {
         try {
-            const query = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
+            // We voegen created_at toe, hoewel de database het automatisch kan doen als DEFAULT CURRENT_TIMESTAMP is ingesteld.
+            const query = 'INSERT INTO users (username, email, password, created_at) VALUES (?, ?, ?, NOW())';
             const [result] = await pool.execute(query, [username, email, password]);
 
             const userId = (result as any).insertId;

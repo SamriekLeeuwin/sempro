@@ -46,10 +46,9 @@ body {
 /* Left side of the login card containing the image */
 .card-left {
     width: 50%;
-    height: 100%;
-    overflow: hidden;
+   
     display: flex;
-    align-items: stretch;
+    align-items: center;
 }
 
 .card-left .image-cover {
@@ -204,6 +203,21 @@ body {
     background-color: #db4437;
 }
 
+/* Google Sign-In button styling */
+.google-signin .google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #303030;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
 /* Google Sign-In button styling */
 .google-signin .google-btn {
     display: flex;

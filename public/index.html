@@ -9,70 +9,66 @@
 </head>
 
 <body>
-    <nav>
-        <div class="logo">MyLogo</div>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <div class="split-container">
-        <!-- Left Side - Login / Register Form -->
-        <div class="split-left">
-            <!-- Registration Form (Sign Up) -->
-            <div class="form-container" id="signup-container">
-                <h4>Start your journey</h4>
-                <h3>Sign up to BudgetLife</h3>
-                <form id="signup-form" method="POST" action="/api/users/register">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-                    <button type="submit">Sign Up</button>
-                </form>
-
-                <h5>or sign up with</h5>
-                <div class="line"></div>
-                <div class="social-icons">
-                    <a href="#"><img src="facebook.png" alt="facebook"></a>
-                    <a href="#"><img src="twitter.png" alt="twitter"></a>
-                    <a href="#"><img src="google.png" alt="google"></a>
-                </div>
-
-                <div class="sign-in-link">
-                    <a href="#" id="sign-in-link">Already have an account? <span>Sign In</span></a>
+    <div class="container">
+        <div class="login-card">
+            <!-- Left Side - Image -->
+            <div class="card-left">
+                <div class="image-cover">
+                    <img src="/public/freepik__upload__82595.png">
                 </div>
             </div>
 
-            <!-- Login Form (Sign In) -->
-            <div class="form-container" id="login-container" style="display: none;">
-                <h4>Welcome Back!</h4>
-                <h3>Sign in to BudgetLife</h3>
-                <form id="login-form" method="POST" action="/api/users/login">
-                    <label for="email-login">Email</label>
-                    <input type="email" id="email-login" name="email" placeholder="Enter your email" required>
-
-                    <label for="password-login">Password</label>
-                    <input type="password" id="password-login" name="password" placeholder="Enter your password" required>
-
-                    <button type="submit">Sign In</button>
-                </form>
-
-                <div class="sign-up-link">
-                    <a href="#" id="sign-up-link">Don't have an account? <span>Sign Up</span></a>
+            <!-- Right Side - Login / Register Form -->
+            <div class="card-right">
+                <!-- Registration Form (Sign Up) -->
+                <div class="form-container" id="signup-container">
+                    <h3 class="title">Sign up to BudgetLife</h3>
+                    <p class="welcome">Start your journey</p>
+                    <form id="signup-form" method="POST" action="/api/users/register">
+                        <div class="input-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="actions">
+                            <button type="submit" class="btn">Sign Up</button>
+                        </div>
+                    </form>
+                    <div class="or-divider">or sign up with</div>
+                    <div class="social-icons">
+                        <a href="#"><img src="facebook.png" alt="facebook"></a>
+                        <a href="#"><img src="twitter.png" alt="twitter"></a>
+                        <a href="#"><img src="google.png" alt="google"></a>
+                    </div>
+                    <div class="create-account">
+                        <a href="#" id="sign-in-link">Already have an account? <span>Sign In</span></a>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Right Side - Image/Welcome Section -->
-        <div class="split-right">
-            <div class="welcome-content">
-                <img src="finance-image.jpg" alt="Finance Management">
+                <!-- Login Form (Sign In) -->
+                <div class="form-container" id="login-container" style="display: none;">
+                    <h3 class="title">Sign in to BudgetLife</h3>
+                    <p class="welcome">Welcome Back!</p>
+                    <form id="login-form" method="POST" action="/api/users/login">
+                        <div class="input-group">
+                            <label for="email-login">Email</label>
+                            <input type="email" id="email-login" name="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="password-login">Password</label>
+                            <input type="password" id="password-login" name="password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="actions">
+                            <button type="submit" class="btn">Sign In</button>
+                        </div>
+                    </form>
+                    <div class="create-account">
+                        <a href="#" id="sign-up-link">Don't have an account? <span>Sign Up</span></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

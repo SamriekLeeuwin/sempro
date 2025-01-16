@@ -1,7 +1,13 @@
 import express from 'express';
-import { pool } from './utils/Database'; // Dit is de import voor je databaseverbinding
+import cors from 'cors'; // Voeg CORS-import toe
+import userRoutes from './routes/userRoutes';
 
 const app = express();
+
+// CORS inschakelen voor alle domeinen
+app.use(cors());  // Hiermee worden alle domeinen toegestaan om verzoeken naar je server te sturen
+
+
 app.use(express.json());  // Voor het verwerken van JSON-body's
 
 // Test API-endpoint
@@ -9,15 +15,8 @@ app.get('/', (req, res) => {
   res.send('Budget App API draait!');
 });
 
-// Endpoint om gebruikers op te halen
-app.get('/users', async (req, res) => {
-  try {
-    const [rows] = await pool.query('SELECT * FROM users');
-    res.json(rows);  // Stuur de gebruikers als JSON terug
-  } catch (err) {
-    res.status(500).json({ error: 'Fout bij ophalen van gebruikers', details: err });
-  }
-});
+// Gebruik de userRoutes
+app.use('/api/users', userRoutes); // Gebruik /api/users als basisroute voor gebruikersroutes
 
 // Start de server
 const PORT = 3000;

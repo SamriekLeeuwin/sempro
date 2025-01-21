@@ -1,4 +1,4 @@
-class Transaction {
+export class Transaction {
     transaction_id: number;
     user_id: number;
     category_id: number;

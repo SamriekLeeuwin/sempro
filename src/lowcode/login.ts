@@ -1,7 +1,7 @@
 const loginForm = document.getElementById('login-form');
 
 if (loginForm) {
-  loginForm.addEventListener('submit', async function(e) {
+  loginForm.addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const emailElement = document.getElementById('email') as HTMLInputElement | null;
@@ -28,8 +28,16 @@ if (loginForm) {
         const contentType = response.headers.get('Content-Type');
         if (contentType && contentType.includes('application/json')) {
           const result = await response.json();
+
+          // Opslaan van gebruikersgegevens in sessionStorage
+          sessionStorage.setItem('userId', result.userId);
+          sessionStorage.setItem('username', result.username);
+          sessionStorage.setItem('totalIncome', result.totalIncome?.toString() || '0');
+          sessionStorage.setItem('totalExpenses', result.totalExpenses?.toString() || '0');
+          sessionStorage.setItem('budgetOverview', (result.totalIncome - result.totalExpenses)?.toString() || '0');
+
           alert('Login succesvol!');
-          window.location.href ='dashboard.html';
+          window.location.href = 'dashboard.html'; // Stuur de gebruiker naar de dashboardpagina
         } else {
           // Als de server geen JSON terugstuurt, toon dan de foutmelding
           const errorText = await response.text();
@@ -49,7 +57,7 @@ if (loginForm) {
 }
 
 // Event listener voor 'Sign In' link (om naar het login-formulier te gaan)
-document.getElementById("sign-in-link")?.addEventListener("click", function() {
+document.getElementById("sign-in-link")?.addEventListener("click", function () {
   // Verberg het registratieformulier en toon het loginformulier
   const signupContainer = document.getElementById("signup-container");
   if (signupContainer) {
@@ -62,7 +70,7 @@ document.getElementById("sign-in-link")?.addEventListener("click", function() {
 });
 
 // Event listener voor 'Sign Up' link (om naar het registratie-formulier te gaan)
-document.getElementById("sign-up-link")?.addEventListener("click", function() {
+document.getElementById("sign-up-link")?.addEventListener("click", function () {
   // Verberg het loginformulier en toon het registratieformulier
   const loginContainer = document.getElementById("login-container");
   if (loginContainer) {

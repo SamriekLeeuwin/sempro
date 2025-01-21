@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Professioneel Dashboard</title>
+    <style>   
+        .custom-shadow {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+        .hover:bg-green-500:hover {
+            background-color: #38a169;
+        }
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="bg-white w-64 shadow-lg h-screen fixed z-20 p-6">
+            <h1 class="text-2xl font-semibold text-gray-800">Budget Life</h1>
+            <ul class="mt-8 space-y-3">
+                <li>
+                    <a href="#" class="flex items-center text-blue-600 hover:text-blue-800 font-medium py-2 transition-all">
+                        <i class="fas fa-tachometer-alt text-xl"></i>
+                        <span class="ml-3 text-lg">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center text-blue-600 hover:text-blue-800 font-medium py-2 transition-all">
+                        <i class="fas fa-wallet text-xl"></i>
+                        <span class="ml-3 text-lg">Inkomsten</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center text-blue-600 hover:text-blue-800 font-medium py-2 transition-all">
+                        <i class="fas fa-credit-card text-xl"></i>
+                        <span class="ml-3 text-lg">Uitgaven</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center text-blue-600 hover:text-blue-800 font-medium py-2 transition-all">
+                        <i class="fas fa-chart-pie text-xl"></i>
+                        <span class="ml-3 text-lg">Rapporten</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center text-blue-600 hover:text-blue-800 font-medium py-2 transition-all">
+                        <i class="fas fa-cogs text-xl"></i>
+                        <span class="ml-3 text-lg">Instellingen</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 ml-64 p-6 bg-gray-100">
+            <!-- Header -->
+            <div class="bg-green-600 p-6 rounded-lg shadow-xl mb-6 custom-shadow">
+                <div class="flex justify-between items-center text-white">
+                    <div>
+                        <h2 class="text-3xl font-semibold">Persoonlijk Budget Dashboard</h2>
+                        <p class="text-lg">Bekijk je financiële situatie op één plek.</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button class="bg-white text-green-600 font-bold rounded-full h-12 w-12 flex items-center justify-center shadow-lg hover:bg-green-100 transition">
+                            <i class="fas fa-plus text-lg"></i>
+                        </button>
+                        <div class="flex items-center text-white">
+                            <img class="w-10 h-10 rounded-full mr-2" src="https://placehold.co/80" alt="User profile picture">
+                            <span id="username">Gebruiker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main content area -->
+            <div class="space-y-6">
+                <!-- Welkomstbericht -->
+                <div class="bg-white shadow-lg p-6 rounded-lg custom-shadow">
+                    <h3 class="text-2xl font-semibold mb-4">Welkom terug!</h3>
+                    <p>Bekijk je budget, inkomsten en uitgaven hieronder.</p>
+                </div>
+
+                <!-- Data containers (Inkomsten, Uitgaven, enz.) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Inkomsten Container -->
+                    <div id="budgetContainer" class="bg-white shadow-lg p-6 rounded-lg card-hover custom-shadow">
+                        <h4 class="text-xl font-semibold mb-4">Inkomsten</h4>
+                        <p id="totalIncome" class="text-green-600 text-2xl">Laden...</p>
+                    </div>
+
+                    <!-- Uitgaven Container -->
+                    <div id="expensesContainer" class="bg-white shadow-lg p-6 rounded-lg card-hover custom-shadow">
+                        <h4 class="text-xl font-semibold mb-4">Uitgaven</h4>
+                        <p id="totalExpenses" class="text-red-600 text-2xl">Laden...</p>
+                    </div>
+
+                    <!-- Budget Overzicht Container -->
+                    <div id="budgetOverviewContainer" class="bg-white shadow-lg p-6 rounded-lg card-hover custom-shadow">
+                        <h4 class="text-xl font-semibold mb-4">Budget Overzicht</h4>
+                        <p id="budgetOverview" class="text-blue-600 text-2xl">Laden...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript - API-aanroepen en dynamische data -->
+    <script>
+
+        // Functie om API aanroepen te doen en gegevens weer te geven
+        async function fetchData() {
+            try {
+                const userResponse = await axios.get('https://example.com/api/users');
+                const budgetResponse = await axios.get('https://example.com/api/budgets');
+                const transactionsResponse = await axios.get('https://example.com/api/transactions');
+                
+                // Weergeven van de data in de containers
+                document.getElementById('totalIncome').innerText = `Inkomsten: €${budgetResponse.data.totalIncome}`;
+                document.getElementById('totalExpenses').innerText = `Uitgaven: €${budgetResponse.data.totalExpenses}`;
+                document.getElementById('budgetOverview').innerText = `Overzicht: €${budgetResponse.data.totalBudget}`;
+            } catch (error) {
+                console.error("Er is een fout opgetreden bij het ophalen van de gegevens:", error);
+            }
+        }
+
+        // Start de data-invoer bij het laden van de pagina
+        window.onload = fetchData;
+    </script>
+    <script src=""></script>
+</body>
+</html>

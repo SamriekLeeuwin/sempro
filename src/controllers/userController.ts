@@ -1,13 +1,17 @@
+// filepath: /c:/Users/Lenovo/sempro/src/controllers/userController.ts
 import { Request, Response } from 'express';
-import { UserService } from '../../src/services/userService';
+import { UserService } from '../services/userService';
+import jwt from 'jsonwebtoken';
+
+const secretKey = 'your_secret_key'; // Replace with your actual secret key
 
 export const UserController = {
-    async getAllUsers(_req: Request, res: Response) {
+    async getAllUsers(req: Request, res: Response) {
         try {
             const users = await UserService.getAllUsers();
             res.json(users);
-        } catch (err: any) {
-            res.status(500).json({ message: 'Error retrieving users', error: err.message });
+        } catch (err) {
+            res.status(500).json({ error: (err as Error).message });
         }
     },
 
@@ -16,22 +20,24 @@ export const UserController = {
         try {
             const user = await UserService.getUserByEmailAndPassword(email, password);
             if (user) {
-                res.json(user);
+                const token = jwt.sign({ userId: user.userId }, secretKey, { expiresIn: '1h' });
+                res.json({ token, userId: user.userId, username: user.username });
             } else {
-                res.status(401).json({ message: 'Invalid credentials' });
+                res.status(401).json({ error: 'Invalid credentials' });
             }
-        } catch (err: any) {
-            res.status(500).json({ message: 'Error logging in', error: err.message });
+        } catch (err) {
+            res.status(500).json({ error: (err as Error).message });
         }
     },
 
     async createUser(req: Request, res: Response) {
         const { username, email, password } = req.body;
         try {
-            const newUser = await UserService.createUser(username, email, password);
-            res.status(201).json({ message: 'User created', user: newUser });
-        } catch (err: any) {
-            res.status(500).json({ message: 'Error creating user', error: err.message });
+            const user = await UserService.createUser(username, email, password);
+            const token = jwt.sign({ userId: user.userId }, secretKey, { expiresIn: '1h' });
+            res.status(201).json({ token, userId: user.userId, username: user.username });
+        } catch (err) {
+            res.status(500).json({ error: (err as Error).message });
         }
     }
 };

@@ -1,6 +1,10 @@
+// filepath: /c:/Users/Lenovo/sempro/src/services/userService.ts
 import { RowDataPacket } from 'mysql2';
 import { pool } from '../utils/Database';
-import { User }  from '../classes/User';
+import { User } from '../classes/User';
+import bcrypt from 'bcrypt';
+
+const saltRounds = 10;
 
 export const UserService = {
     // Fetch all users
@@ -21,14 +25,19 @@ export const UserService = {
     // Fetch user by email and password
     async getUserByEmailAndPassword(email: string, password: string): Promise<User | null> {
         try {
-            const query = 'SELECT * FROM users WHERE email = ? AND password = ?';
-            const [rows] = await pool.query<RowDataPacket[]>(query, [email, password]);
+            const query = 'SELECT * FROM users WHERE email = ?';
+            const [rows] = await pool.query<RowDataPacket[]>(query, [email]);
 
             if (rows.length === 0) {
                 throw new Error('Invalid credentials');
             }
 
             const row = rows[0];
+            const isPasswordValid = await bcrypt.compare(password, row.password);
+            if (!isPasswordValid) {
+                throw new Error('Invalid credentials');
+            }
+
             return new User(row.username, row.email, row.password, row.user_id);
         } catch (err) {
             if (err instanceof Error) {
@@ -41,12 +50,12 @@ export const UserService = {
     // Create a new user
     async createUser(username: string, email: string, password: string): Promise<User> {
         try {
-            // We voegen created_at toe, hoewel de database het automatisch kan doen als DEFAULT CURRENT_TIMESTAMP is ingesteld.
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
             const query = 'INSERT INTO users (username, email, password, created_at) VALUES (?, ?, ?, NOW())';
-            const [result] = await pool.execute(query, [username, email, password]);
+            const [result] = await pool.execute(query, [username, email, hashedPassword]);
 
             const userId = (result as any).insertId;
-            return new User(username, email, password, userId);
+            return new User(username, email, hashedPassword, userId);
         } catch (err) {
             if (err instanceof Error) {
                 throw new Error(`Error in createUser: ${err.message}`);

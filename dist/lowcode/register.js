@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const registerForm = document.getElementById('signup-form');
 if (registerForm) {
     registerForm.addEventListener('submit', async function (e) {
@@ -24,7 +25,7 @@ if (registerForm) {
             const result = await response.json();
             if (response.ok) {
                 alert('Registratie succesvol!');
-                window.location.href = '/login'; // Redirect naar inlogpagina na succesvolle registratie
+                window.location.href = 'dashboard.html'; // Verander deze lijn naar je dashboard.html na succesvolle registratie
             }
             else {
                 alert(result.message);

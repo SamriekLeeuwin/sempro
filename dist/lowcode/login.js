@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const loginForm = document.getElementById('login-form');
 if (loginForm) {
     loginForm.addEventListener('submit', async function (e) {
@@ -11,6 +12,15 @@ if (loginForm) {
         }
         const email = emailElement.value;
         const password = passwordElement.value;
+        // Simple validation
+        if (!email.includes('@')) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+        if (password.length < 6) {
+            alert('Password should be at least 6 characters long.');
+            return;
+        }
         try {
             const response = await fetch('http://localhost:3000/api/users/login', {
                 method: 'POST',
@@ -23,31 +33,36 @@ if (loginForm) {
                 const contentType = response.headers.get('Content-Type');
                 if (contentType && contentType.includes('application/json')) {
                     const result = await response.json();
-                    alert('Login succesvol!');
-                    window.location.href = 'dashboard.html';
+                    // Store user data in sessionStorage, including the JWT token
+                    sessionStorage.setItem('token', result.token); // Store JWT token
+                    sessionStorage.setItem('userId', result.userId);
+                    sessionStorage.setItem('username', result.username);
+                    sessionStorage.setItem('totalIncome', result.totalIncome?.toString() || '0');
+                    sessionStorage.setItem('totalExpenses', result.totalExpenses?.toString() || '0');
+                    sessionStorage.setItem('budgetOverview', (result.totalIncome - result.totalExpenses)?.toString() || '0');
+                    alert('Login successful!');
+                    window.location.href = 'dashboard.html'; // Redirect to the dashboard page
                 }
                 else {
-                    // Als de server geen JSON terugstuurt, toon dan de foutmelding
                     const errorText = await response.text();
-                    console.error('Fout bij login: Server reageerde niet met JSON', errorText);
-                    alert('Login mislukt: Server reageerde niet met een geldig antwoord.');
+                    console.error('Error: Server did not return JSON', errorText);
+                    alert('Login failed: Server did not respond with valid data.');
                 }
             }
             else {
                 const errorText = await response.text();
                 console.error('Error response:', errorText);
-                alert('Login mislukt: ' + errorText);
+                alert('Login failed: ' + errorText);
             }
         }
         catch (error) {
-            console.error('Login fout:', error);
-            alert('Er is iets mis gegaan met inloggen.');
+            console.error('Login error:', error);
+            alert('An error occurred during login.');
         }
     });
 }
-// Event listener voor 'Sign In' link (om naar het login-formulier te gaan)
+// Event listener for 'Sign In' link
 document.getElementById("sign-in-link")?.addEventListener("click", function () {
-    // Verberg het registratieformulier en toon het loginformulier
     const signupContainer = document.getElementById("signup-container");
     if (signupContainer) {
         signupContainer.style.display = "none";
@@ -57,9 +72,8 @@ document.getElementById("sign-in-link")?.addEventListener("click", function () {
         loginContainer.style.display = "block";
     }
 });
-// Event listener voor 'Sign Up' link (om naar het registratie-formulier te gaan)
+// Event listener for 'Sign Up' link
 document.getElementById("sign-up-link")?.addEventListener("click", function () {
-    // Verberg het loginformulier en toon het registratieformulier
     const loginContainer = document.getElementById("login-container");
     if (loginContainer) {
         loginContainer.style.display = "none";

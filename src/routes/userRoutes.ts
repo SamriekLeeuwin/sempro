@@ -1,15 +1,17 @@
+// filepath: /c:/Users/Lenovo/sempro/src/routes/userRoutes.ts
 import { Router } from 'express';
 import { UserController } from '../controllers/userController';
+import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = Router();
 
 // Haal alle gebruikers op (GET)
-router.get('/', UserController.getAllUsers);
+router.get('/', authMiddleware, UserController.getAllUsers);
 
 // Inloggen (POST)
-router.post('/login', UserController.getUserByEmailAndPassword); // POST /api/users/login for login
+router.post('/login', UserController.getUserByEmailAndPassword);
 
 // Registreren (POST)
-router.post('/register', UserController.createUser); // POST /api/users/register for creating a new user
+router.post('/register', UserController.createUser);
 
 export default router;

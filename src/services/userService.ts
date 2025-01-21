@@ -55,7 +55,7 @@ export const UserService = {
             const [result] = await pool.execute(query, [username, email, hashedPassword]);
 
             const userId = (result as any).insertId;
-            return new User(username, email, hashedPassword, userId);
+            return new User(userId,username, email, hashedPassword,);
         } catch (err) {
             if (err instanceof Error) {
                 throw new Error(`Error in createUser: ${err.message}`);

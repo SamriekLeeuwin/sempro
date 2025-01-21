@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",          // Gebruik CommonJS-modules (standaard voor Node.js)
-    "moduleResolution": "node",    // Resolutie van modules zoals in Node.js
+    "module": "Node16",            // Gebruik Node16-modules
+    "moduleResolution": "node16",    // Resolutie van modules zoals in Node.js
     "target": "ES2020",            // Doelversie van JavaScript (ES2020)
     "sourceMap": true,             // Maak source maps voor debugging
     "outDir": "./dist",            // De directory waar de JavaScript-bestanden naartoe worden gecompileerd
@@ -10,6 +10,7 @@
     "strict": true                 // Zet strikte type checks aan
   },
   "include": [
-    "src/**/*"                     // Neem alle bestanden in de src map mee
+    "src/**/*",
+    "tests/**/*"                     // Neem alle bestanden in de src map mee
   ]
 }

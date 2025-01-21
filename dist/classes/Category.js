@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Category = void 0;
 class Category {
     constructor(category_id, user_id, name, type, created_at) {
         this.category_id = category_id;
@@ -8,4 +10,5 @@ class Category {
         this.created_at = created_at;
     }
 }
+exports.Category = Category;
 //# sourceMappingURL=Category.js.map

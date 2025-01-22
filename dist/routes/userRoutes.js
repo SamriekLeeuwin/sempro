@@ -1,15 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-// filepath: /c:/Users/Lenovo/sempro/src/routes/userRoutes.ts
-const express_1 = require("express");
-const userController_1 = require("../controllers/userController");
-const authMiddleware_1 = require("../middleware/authMiddleware");
-const router = (0, express_1.Router)();
+import { Router } from 'express';
+import { UserController } from '../../dist/controllers/userController.js';
+const router = Router();
 // Haal alle gebruikers op (GET)
-router.get('/', authMiddleware_1.authMiddleware, userController_1.UserController.getAllUsers);
+router.get('/', UserController.getAllUsers);
 // Inloggen (POST)
-router.post('/login', userController_1.UserController.getUserByEmailAndPassword);
+router.post('/login', UserController.getUserByEmailAndPassword); // POST /api/users/login for login
 // Registreren (POST)
-router.post('/register', userController_1.UserController.createUser);
-exports.default = router;
-//# sourceMappingURL=userRoutes.js.map
+router.post('/register', UserController.createUser); // POST /api/users/register for creating a new user
+export default router;

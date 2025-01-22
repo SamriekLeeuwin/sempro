@@ -1,12 +1,9 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.BudgetController = void 0;
-const budgetService_1 = require("../services/budgetService");
-class BudgetController {
+import { BudgetService } from '../../dist/services/BudgetService.js';
+export class BudgetController {
     // Haal alle budgetten op (GET)
     static async getAllBudgets(req, res) {
         try {
-            const budgets = await budgetService_1.BudgetService.getAllBudgets();
+            const budgets = await BudgetService.getAllBudgets();
             res.json(budgets);
         }
         catch (err) {
@@ -17,7 +14,7 @@ class BudgetController {
     static async getBudgetByUserId(req, res) {
         const { user_id } = req.params;
         try {
-            const budget = await budgetService_1.BudgetService.getBudgetByUserId(Number(user_id));
+            const budget = await BudgetService.getBudgetByUserId(Number(user_id));
             res.json(budget);
         }
         catch (err) {
@@ -28,7 +25,7 @@ class BudgetController {
     static async createBudget(req, res) {
         const { user_id, category_id, amount, month } = req.body;
         try {
-            const budget = await budgetService_1.BudgetService.createBudget(user_id, category_id, amount, month);
+            const budget = await BudgetService.createBudget(user_id, category_id, amount, month);
             res.status(201).json(budget);
         }
         catch (err) {
@@ -36,5 +33,3 @@ class BudgetController {
         }
     }
 }
-exports.BudgetController = BudgetController;
-//# sourceMappingURL=BudgetController.js.map

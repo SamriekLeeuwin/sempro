@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors'; // Voeg CORS-import toe
-import userRoutes from './routes/userRoutes';
-import budgetRoutes from '../src/routes/budgetRoutes'; // Importeer de budget routes
-import categoryRoutes from '../src/routes/categoryRoutes'; // Importeer de category routes
-import transactionRoutes from './routes/transactionRoutes'; // Importeer de transaction routes
+import userRoutes from '../src/routes/userRoutes.ts'; // Importeer de user routes
+import budgetRoutes from '../src/routes/budgetRoutes.ts'; // Importeer de budget routes
+import categoryRoutes from '../src/routes/categoryRoutes.ts'; // Importeer de category routes
+import transactionRoutes from './routes/transactionRoutes.ts'; // Importeer de transaction routes
 
-const app = express();
+export const app = express();
 
 // CORS inschakelen voor alle domeinen
 app.use(cors());  // Hiermee worden alle domeinen toegestaan om verzoeken naar je server te sturen

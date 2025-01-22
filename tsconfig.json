@@ -1,16 +1,15 @@
 {
   "compilerOptions": {
-    "module": "Node16",            // Gebruik Node16-modules
-    "moduleResolution": "node16",    // Resolutie van modules zoals in Node.js
-    "target": "ES2020",            // Doelversie van JavaScript (ES2020)
-    "sourceMap": true,             // Maak source maps voor debugging
-    "outDir": "./dist",            // De directory waar de JavaScript-bestanden naartoe worden gecompileerd
-    "rootDir": "./src",            // De root directory van je TypeScript-bestanden (src)
-    "esModuleInterop": true,       // Zorg voor compatibiliteit met ES Modules
-    "strict": true                 // Zet strikte type checks aan
+    "target": "esnext",                 // Ondersteunt moderne JavaScript
+    "module": "esnext",                 // Genereer ES Modules
+    "moduleResolution": "node",         // Gebruik Node.js-module-resolutie
+    "esModuleInterop": true,            // Compatibiliteit met CommonJS-modules
+    "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "strict": true,                     // Schakel strikte typechecks in
+    "skipLibCheck": true,               // Sla typechecks voor node_modules over
+    "outDir": "./dist"                  // Map voor de gecompileerde bestanden
   },
-  "include": [
-    "src/**/*",
-    "tests/**/*"                     // Neem alle bestanden in de src map mee
-  ]
+  "include": ["src/**/*"]
 }

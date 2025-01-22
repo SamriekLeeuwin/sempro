@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CategoryService } from '../services/categoryService';
+import { CategoryService } from '../../src/services/categoryService';
 
 export class CategoryController {
     // Haal alle categorieën op (GET)

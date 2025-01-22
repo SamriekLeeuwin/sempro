@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const registerForm = document.getElementById('signup-form');
+export const registerForm = document.getElementById('signup-form');
 if (registerForm) {
     registerForm.addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -37,4 +35,3 @@ if (registerForm) {
         }
     });
 }
-//# sourceMappingURL=register.js.map

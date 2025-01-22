@@ -1,4 +1,4 @@
-const loginForm = document.getElementById('login-form');
+ export const loginForm = document.getElementById('login-form');
 
 if (loginForm) {
   loginForm.addEventListener('submit', async function (e) {

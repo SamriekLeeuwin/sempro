@@ -1,16 +1,10 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserController = void 0;
-const userService_1 = require("../services/userService");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+import { UserService } from '../../dist/services/userService.js';
+import jwt from 'jsonwebtoken';
 const secretKey = 'your_secret_key'; // Replace with your actual secret key
-exports.UserController = {
+export const UserController = {
     async getAllUsers(req, res) {
         try {
-            const users = await userService_1.UserService.getAllUsers();
+            const users = await UserService.getAllUsers();
             res.json(users);
         }
         catch (err) {
@@ -20,9 +14,9 @@ exports.UserController = {
     async getUserByEmailAndPassword(req, res) {
         const { email, password } = req.body;
         try {
-            const user = await userService_1.UserService.getUserByEmailAndPassword(email, password);
+            const user = await UserService.getUserByEmailAndPassword(email, password);
             if (user) {
-                const token = jsonwebtoken_1.default.sign({ userId: user.userId }, secretKey, { expiresIn: '1h' });
+                const token = jwt.sign({ userId: user.userId }, secretKey, { expiresIn: '1h' });
                 res.json({ token, userId: user.userId, username: user.username });
             }
             else {
@@ -36,8 +30,8 @@ exports.UserController = {
     async createUser(req, res) {
         const { username, email, password } = req.body;
         try {
-            const user = await userService_1.UserService.createUser(username, email, password);
-            const token = jsonwebtoken_1.default.sign({ userId: user.userId }, secretKey, { expiresIn: '1h' });
+            const user = await UserService.createUser(username, email, password);
+            const token = jwt.sign({ userId: user.userId }, secretKey, { expiresIn: '1h' });
             res.status(201).json({ token, userId: user.userId, username: user.username });
         }
         catch (err) {
@@ -45,4 +39,3 @@ exports.UserController = {
         }
     }
 };
-//# sourceMappingURL=userController.js.map

@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
-const categoryController_1 = require("../controllers/categoryController");
-const router = (0, express_1.Router)();
+import { Router } from 'express';
+import { CategoryController } from '../../dist/controllers/categoryController.js';
+const router = Router();
 // Haal alle categorieën op
-router.get('/', categoryController_1.CategoryController.getAllCategories);
+router.get('/', CategoryController.getAllCategories);
 // Voeg een nieuwe categorie toe
-router.post('/', categoryController_1.CategoryController.createCategory);
-exports.default = router;
-//# sourceMappingURL=categoryRoutes.js.map
+router.post('/', CategoryController.createCategory);
+export default router;

@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const loginForm = document.getElementById('login-form');
+export const loginForm = document.getElementById('login-form');
 if (loginForm) {
     loginForm.addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -83,4 +81,3 @@ document.getElementById("sign-up-link")?.addEventListener("click", function () {
         signupContainer.style.display = "block";
     }
 });
-//# sourceMappingURL=login.js.map

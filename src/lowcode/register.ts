@@ -1,40 +1,35 @@
- export const registerForm = document.getElementById('signup-form');
+import { ApiService } from '../services/apiService';
+
+const registerForm = document.getElementById('signup-form');
+
 if (registerForm) {
-  registerForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
+    registerForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
 
-    const emailElement = document.getElementById('email') as HTMLInputElement | null;
-    const passwordElement = document.getElementById('password') as HTMLInputElement | null;
-    const usernameElement = document.getElementById('username') as HTMLInputElement | null;
+        const emailElement = document.getElementById('email') as HTMLInputElement;
+        const passwordElement = document.getElementById('password') as HTMLInputElement;
+        const usernameElement = document.getElementById('username') as HTMLInputElement;
 
-    if (!emailElement || !passwordElement || !usernameElement) {
-      alert('Email, password or username element not found');
-      return;
-    }
+        if (!emailElement || !passwordElement || !usernameElement) {
+            alert('Please fill in all fields.');
+            return;
+        }
 
-    const email = emailElement.value;
-    const password = passwordElement.value;
-    const username = usernameElement.value;
+        const email = emailElement.value;
+        const password = passwordElement.value;
+        const username = usernameElement.value;
 
-    try {
-      const response = await fetch('http://localhost:3000/api/users/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, email, password }), // Stuur de registratiegegevens
-      });
-
-      const result = await response.json();
-      if (response.ok) {
-        alert('Registratie succesvol!');
-        window.location.href = 'dashboard.html'; // Verander deze lijn naar je dashboard.html na succesvolle registratie
-      } else {
-        alert(result.message);
-      }
-    } catch (error) {
-      console.error('Registratie fout:', error);
-      alert('Er is iets mis gegaan met registreren.');
-    }
-  });
+        try {
+            const result = await ApiService.register(username, email, password); // Call the API service
+            alert('Registration successful!');
+            window.location.href = 'dashboard.html'; // Redirect to the dashboard
+        } catch (error) {
+            console.error('Registration failed:', error);
+            if (error instanceof Error) {
+                alert(`Error: ${error.message}`);
+            } else {
+                alert('An unknown error occurred.');
+            }
+        }
+    });
 }

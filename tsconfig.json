@@ -11,5 +11,6 @@
     "skipLibCheck": true,               // Sla typechecks voor node_modules over
     "outDir": "./dist"                  // Map voor de gecompileerde bestanden
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*",
+   "tests/**/*"]
 }

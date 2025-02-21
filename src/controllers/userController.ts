@@ -3,7 +3,6 @@ import { Request, Response } from 'express';
 import { UserService } from '../services/userService';
 import jwt from 'jsonwebtoken';
 
-const secretKey = 'your_secret_key'; // Replace with your actual secret key
 
 export const UserController = {
     async getAllUsers(req: Request, res: Response) {

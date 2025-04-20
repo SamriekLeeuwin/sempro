@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",                 // Ondersteunt moderne JavaScript
-    "module": "esnext",                 // Genereer ES Modules
+    "module": "CommonJS",                 // Genereer ES Modules
     "moduleResolution": "node",         // Gebruik Node.js-module-resolutie
     "esModuleInterop": true,            // Compatibiliteit met CommonJS-modules
     "forceConsistentCasingInFileNames": true,

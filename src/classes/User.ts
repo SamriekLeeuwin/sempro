@@ -10,14 +10,17 @@ export class User {
         this.userId = userId;
         this.username = username;
         this.email = email;
-        const bcrypt = require('bcrypt');
-        const saltRounds = 10;
-        this._password = bcrypt.hashSync(password, saltRounds);
+        this._password = password; 
+    }
+
+    public get password(): string {
+        return this._password;
     }
 }
 
+
 // Function to validate if an email address is in a correct format using regular expression
-const isValidEmail = (email: string): boolean => {
+export const isValidEmail = (email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex pattern to match a valid email address
     return emailRegex.test(email); // Returns true if the email matches the regex pattern
 };
@@ -25,10 +28,9 @@ const isValidEmail = (email: string): boolean => {
 // Function to validate if the password meets certain security requirements
 // Password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character
 // It must be at least 8 characters long
-const isValidPassword = (password: string): boolean => {
+export const isValidPassword = (password: string): boolean => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return passwordRegex.test(password); // Returns true if the password matches the regex pattern
 };
 
 export default User; // Export the User class for use in other modules
-export { isValidEmail, isValidPassword }; // Export the validation functions for use in other modules

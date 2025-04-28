@@ -58,4 +58,21 @@ export class ApiService {
     public static async login(email: string, password: string): Promise<any> {
         return this.fetchJson('POST', '/users/login', { email, password });
     }
+
+        /**
+     * Haal budgetgegevens op voor een specifieke gebruiker.
+     * @param userId - ID van de gebruiker.
+     */
+        public static async getBudgets(userId: string | number): Promise<any> {
+            return this.fetchJson('GET', `/budgets/${userId}`);
+        }
+    
+        /**
+         * Haal transactiegegevens op voor een specifieke gebruiker.
+         * @param userId - ID van de gebruiker.
+         */
+        public static async getTransactions(userId: string | number): Promise<any> {
+            return this.fetchJson('GET', `/transactions/${userId}`);
+        }
+    
 }

@@ -2,84 +2,117 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/css/style.css">
-    <title>Budget App</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/public/css/style.css" />
+  <title>Budget App</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="login-card">
-            <!-- Left Side - Image -->
-            <div class="card-left">
-                <div class="image-cover">
-                    <img src="/public//img/freepik__upload__82595.png">
-                </div>
-            </div>
-
-            <!-- Right Side - Login / Register Form -->
-            <div class="card-right">
-                <!-- Registration Form (Sign Up) -->
-                <div class="form-container" id="signup-container">
-                    <h3 class="title">Sign up to BudgetLife</h3>
-                    <p class="welcome">Start your journey</p>
-                    <form id="signup-form" method="POST" action="/api/users/register">
-                        <div class="input-group">
-                            <label for="username">Username</label>
-                            <input type="text" id="username" name="username" placeholder="Enter your username" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                        </div>
-                        <div class="actions">
-                            <button type="submit" class="btn">Sign Up</button>
-                        </div>
-                    </form>
-                    
-                    <div class="or-divider">or sign up with</div>
-                    <div class="social-icons">
-                        <a href="#" class="facebook"><img src="/public//img/facebook.png" alt="facebook"></a>
-                        <a href="#" class="twitter"><img src="/public//img/twitter-alt.png" alt="twitter"></a>
-                        <a href="#" class="google"><img src="/public//img/google.png" alt="google"></a>
-                    </div>
-                    <div class="create-account">
-                        <a href="#" id="sign-in-link">Already have an account? <span>Sign In</span></a>
-                    </div>
-                </div>
-
-                <!-- Login Form (Sign In) -->
-                <div class="form-container" id="login-container" style="display: none;">
-                    <h3 class="title">Sign in to BudgetLife</h3>
-                    <p class="welcome">Welcome Back!</p>
-                    <form id="login-form" method="POST" action="/api/users/login">
-                        <div class="input-group">
-                            <label for="email-login">Email</label>
-                            <input type="email" id="email-login" name="email" placeholder="Enter your email" required>
-                        </div>
-                        <div class="input-group">
-                            <label for="password-login">Password</label>
-                            <input type="password" id="password-login" name="password" placeholder="Enter your password" required>
-                        </div>
-                        <div class="actions">
-                            <button type="submit" class="btn">Sign In</button>
-                        </div>
-                    </form>
-                    <div class="create-account">
-                        <a href="#" id="sign-up-link">Don't have an account? <span>Sign Up</span></a>
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="login-card">
+      <!-- Left Side - Image -->
+      <div class="card-left">
+        <div class="image-cover">
+          <img src="/public/img/freepik__upload__82595.png" alt="budgetlife illustration" />
         </div>
-    </div>
+      </div>
 
-    <script src="../../dist/lowcode/login.js" type="module"></script>
-    <script src="../../dist/lowcode/register.js" type="module"></script>
+      <!-- Right Side - Forms -->
+      <div class="card-right">
+        <!-- Sign Up Form -->
+        <div class="form-container" id="signup-container" style="display: none;">
+          <h3 class="title">Sign up to BudgetLife</h3>
+          <p class="welcome">Start your journey</p>
+          <form id="signup-form" novalidate>
+            <div class="input-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username" placeholder="Enter your username" required />
+            </div>
+            <div class="input-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email" required />
+            </div>
+            <div class="input-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" placeholder="Enter your password" required />
+            </div>
+            <div class="actions">
+              <button type="submit" class="btn">Sign Up</button>
+            </div>
+          </form>
+
+          <div class="or-divider">or sign up with</div>
+          <div class="social-icons">
+            <a href="#" class="facebook"><img src="/public/img/facebook.png" alt="facebook" /></a>
+            <a href="#" class="twitter"><img src="/public/img/twitter-alt.png" alt="twitter" /></a>
+            <a href="#" class="google"><img src="/public/img/google.png" alt="google" /></a>
+          </div>
+
+          <div class="create-account">
+            <a href="#" id="sign-in-link">Already have an account? <span>Sign In</span></a>
+          </div>
+        </div>
+
+        <!-- Sign In Form -->
+        <div class="form-container" id="login-container">
+          <h3 class="title">Sign in to BudgetLife</h3>
+          <p class="welcome">Welcome Back!</p>
+          <form id="login-form" novalidate>
+            <div class="input-group">
+              <label for="email-login">Email</label>
+              <input type="email" id="email-login" name="email" placeholder="Enter your email" required />
+            </div>
+            <div class="input-group">
+              <label for="password-login">Password</label>
+              <input type="password" id="password-login" name="password" placeholder="Enter your password" required />
+            </div>
+            <div class="actions">
+              <button type="submit" class="btn">Sign In</button>
+            </div>
+          </form>
+
+          <div class="create-account">
+            <a href="#" id="sign-up-link">Don't have an account? <span>Sign Up</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth toggle -->
+  <script>
+    const loginContainer = document.getElementById('login-container');
+    const signupContainer = document.getElementById('signup-container');
+    const signUpLink = document.getElementById('sign-up-link');
+    const signInLink = document.getElementById('sign-in-link');
+
+    signUpLink?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (loginContainer) {
+        
+        loginContainer.style.display = 'none';
+      }
+      if (signupContainer) {
+
+        signupContainer.style.display = 'block';
+      }
+    });
+
+    signInLink?.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (signupContainer) {
+        signupContainer.style.display = 'none';
+      }
+      if (loginContainer) {
+        loginContainer.style.display = 'block';
+      }
+    });
+  </script>
+
+  <!-- JS Modules -->
+  <script src="../../dist/lowcode/login.js" type="module"></script>
+  <script src="../../dist/lowcode/register.js" type="module"></script>
 </body>
 
 </html>

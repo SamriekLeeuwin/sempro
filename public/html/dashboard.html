@@ -114,29 +114,6 @@
             </div>
         </div>
     </div>
-
-    <!-- JavaScript - API-aanroepen en dynamische data -->
-    <script>
-
-        // Functie om API aanroepen te doen en gegevens weer te geven
-        async function fetchData() {
-            try {
-                const userResponse = await axios.get('https://example.com/api/users');
-                const budgetResponse = await axios.get('https://example.com/api/budgets');
-                const transactionsResponse = await axios.get('https://example.com/api/transactions');
-                
-                // Weergeven van de data in de containers
-                document.getElementById('totalIncome').innerText = `Inkomsten: €${budgetResponse.data.totalIncome}`;
-                document.getElementById('totalExpenses').innerText = `Uitgaven: €${budgetResponse.data.totalExpenses}`;
-                document.getElementById('budgetOverview').innerText = `Overzicht: €${budgetResponse.data.totalBudget}`;
-            } catch (error) {
-                console.error("Er is een fout opgetreden bij het ophalen van de gegevens:", error);
-            }
-        }
-
-        // Start de data-invoer bij het laden van de pagina
-        window.onload = fetchData;
-    </script>
     <script src=""></script>
 </body>
 </html>
